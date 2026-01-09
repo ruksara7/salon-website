@@ -144,7 +144,7 @@ function submitQuickBooking(e) {
 }
 
 function sendToWhatsApp(data) {
-  const number = '919999999999'; // CHANGE TO REAL NUMBER
+  const number = '919821504642'; // CHANGE TO REAL NUMBER
 
   const message = `
 Booking Request
@@ -164,7 +164,7 @@ Time: ${data.time || 'Flexible'}
 
 function contactViaWhatsApp() {
   window.open(
-    'https://wa.me/919999999999?text=Hello! I’d like to know about your services.',
+    'https://wa.me/919821504642?text=Hello! I’d like to know about your services.',
     '_blank'
   );
 }
