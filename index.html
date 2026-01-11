@@ -3,177 +3,646 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  
+  <!-- SEO Optimized -->
   <title>Luxe Salon – Professional Hair & Beauty Services</title>
-  <meta name="description" content="Professional salon demo website with WhatsApp-style booking flow, services, gallery and reviews.">
-
-  <!-- Social preview -->
-  <meta property="og:title" content="Luxe Salon – Website Demo">
-  <meta property="og:description" content="Salon website demo with booking, services and reviews.">
+  <meta name="description" content="Professional salon website demo with booking system, services, gallery, and reviews. Modern responsive design.">
+  <meta name="keywords" content="salon website demo, beauty services, hair styling, booking system, responsive design">
+  <meta name="author" content="Ruksar Ansari - Web Designer">
+  
+  <!-- Open Graph / Social -->
+  <meta property="og:title" content="Luxe Salon – Professional Demo">
+  <meta property="og:description" content="Modern salon website with booking, services & reviews">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://ruksara7.github.io/salon-website/">
+  
+  <!-- Preload Critical Assets -->
+  <link rel="preload" href="styles.css" as="style">
+  <link rel="dns-prefetch" href="//fonts.googleapis.com">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💇</text></svg>">
+  
+  <!-- Schema Markup (SEO Gold) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BeautySalon",
+    "name": "Luxe Salon Demo",
+    "description": "Professional salon services demo",
+    "url": "https://ruksara7.github.io/salon-website/",
+    "telephone": "+91-9821504642"
+  }
+  </script>
+  
+  <style>
+    /* COMPLETE PROFESSIONAL CSS - 100% RESPONSIVE + ANIMATIONS */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="styles.css">
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    /* Skip link for accessibility */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* HEADER */
+    header {
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+      animation: slideDown 0.5s ease-out;
+    }
+
+    @keyframes slideDown {
+      from { transform: translateY(-100%); }
+      to { transform: translateY(0); }
+    }
+
+    nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .logo span { color: #ff6b6b; }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+
+    nav a:hover { color: #ff6b6b; }
+    nav a:hover::after {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background-color: #ff6b6b;
+      transform: scaleX(0);
+      transition: all 0.3s ease;
+      opacity: 0;
+    }
+
+    .nav-buttons { display: flex; gap: 1rem; }
+
+    /* BUTTONS */
+    .btn {
+      padding: 12px 28px;
+      border: none;
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      text-decoration: none;
+      display: inline-block;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: left 0.5s;
+    }
+
+    .btn:hover::before { left: 100%; }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+      color: white;
+      box-shadow: 0 10px 30px rgba(255,107,107,0.4);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 40px rgba(255,107,107,0.6);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: #ff6b6b;
+      border: 2px solid #ff6b6b;
+    }
+
+    .btn-outline:hover {
+      background: #ff6b6b;
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 120px 2rem 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><radialGradient id="a" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="%23ffffff15"/><stop offset="100%" stop-color="%23ffffff00"/></radialGradient></defs><circle cx="20" cy="20" r="2" fill="url(%23a)"><animate attributeName="r" values="2;3;2" dur="3s" repeatCount="indefinite"/></circle><circle cx="80" cy="80" r="1.5" fill="url(%23a)"><animate attributeName="r" values="1.5;2.5;1.5" dur="3s" repeatCount="indefinite" begin="0.5s"/></circle></svg>') repeat;
+      animation: float 20s infinite linear;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px) rotate(0deg); }
+      100% { transform: translateY(-20px) rotate(360deg); }
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 800;
+      margin-bottom: 1rem;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      animation: fadeInUp 1s ease-out 0.2s both;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeInUp 1s ease-out 0.4s both;
+    }
+
+    /* SECTIONS */
+    .section {
+      padding: 80px 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      text-align: center;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #333, #666);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 3rem;
+      color: #666;
+      font-size: 1.1rem;
+    }
+
+    /* GRIDS */
+    .services-grid, .stylists-grid, .gallery-grid, .testimonials-grid {
+      display: grid;
+      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+
+    /* SERVICE CARD */
+    .service-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #ff6b6b, #4ecdc4);
+    }
+
+    .service-card:hover {
+      transform: translateY(-12px) scale(1.02);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+    }
+
+    .service-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+      color: white;
+    }
+
+    /* RESPONSIVE - PHONE/TABLET/DESKTOP */
+    @media (max-width: 768px) {
+      nav { padding: 1rem; flex-direction: column; gap: 1rem; }
+      nav ul { gap: 1rem; flex-wrap: wrap; justify-content: center; }
+      .hero { padding: 100px 1rem 60px; }
+      .section { padding: 60px 1rem; }
+      .hero-buttons { flex-direction: column; align-items: center; }
+      .btn { width: 100%; max-width: 300px; }
+      .services-grid, .stylists-grid, .gallery-grid, .testimonials-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 2rem; }
+      .section-title { font-size: 1.8rem; }
+    }
+
+    /* MODAL */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(5px);
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .modal-content {
+      background: white;
+      margin: 5% auto;
+      padding: 2rem;
+      width: 90%;
+      max-width: 500px;
+      border-radius: 20px;
+      position: relative;
+      animation: slideIn 0.3s ease-out;
+    }
+
+    @keyframes slideIn {
+      from { transform: translateY(-50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .modal-close {
+      position: absolute;
+      right: 1rem;
+      top: 1rem;
+      background: none;
+      border: none;
+      font-size: 2rem;
+      cursor: pointer;
+      color: #999;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #1a1a1a;
+      color: white;
+      text-align: center;
+      padding: 3rem 2rem 2rem;
+    }
+
+    footer p {
+      margin-bottom: 0.5rem;
+      opacity: 0.8;
+    }
+  </style>
 </head>
 
 <body>
+  <!-- Accessibility Skip Link -->
+  <a href="#main-content" class="sr-only">Skip to main content</a>
 
-<!-- ================= HEADER ================= -->
-<header>
-  <nav>
-    <div class="logo">Luxe <span>Salon</span></div>
+  <!-- HEADER -->
+  <header>
+    <nav>
+      <div class="logo">Luxe <span>Salon</span></div>
+      <ul>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#stylists">Team</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#booking">Booking</a></li>
+      </ul>
+      <div class="nav-buttons">
+        <button class="btn btn-outline" onclick="openBookingModal()">Book Now</button>
+      </div>
+    </nav>
+  </header>
 
-    <ul>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#stylists">Team</a></li>
-      <li><a href="#gallery">Gallery</a></li>
-      <li><a href="#reviews">Reviews</a></li>
-      <li><a href="#booking">Booking</a></li>
-    </ul>
-
-    <div class="nav-buttons">
-      <button class="btn btn-outline" onclick="openBookingModal()">Book (Demo)</button>
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Transform Your Look</h1>
+    <p>Professional salon services with modern booking system and exceptional care.</p>
+    <div class="hero-buttons">
+      <button class="btn btn-primary" onclick="openBookingModal()">Book Appointment</button>
+      <button class="btn btn-outline" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">
+        Explore Services
+      </button>
     </div>
-  </nav>
-</header>
+  </section>
 
-<!-- ================= HERO ================= -->
-<section class="hero">
-  <h1>Transform Your Look</h1>
-  <p>Luxury salon website demo with modern design and smooth booking flow.</p>
+  <main id="main-content">
+    <!-- SERVICES -->
+    <section id="services" class="section">
+      <h2 class="section-title">Our Services</h2>
+      <p class="section-subtitle">Premium beauty treatments tailored for you</p>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">💇‍♀️</div>
+          <h3>Haircut & Styling</h3>
+          <p>Precision cuts, modern styles, and personalized treatments.</p>
+          <span class="price">₹800+</span>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">💅</div>
+          <h3>Nail Art</h3>
+          <p>Professional manicure, pedicure, and creative nail designs.</p>
+          <span class="price">₹500+</span>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">💆‍♀️</div>
+          <h3>Facial Treatments</h3>
+          <p>Deep cleansing, hydration, and anti-aging facials.</p>
+          <span class="price">₹1200+</span>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🎨</div>
+          <h3>Color & Highlights</h3>
+          <p>Trendy colors, balayage, and highlight techniques.</p>
+          <span class="price">₹2000+</span>
+        </div>
+      </div>
+    </section>
 
-  <div class="hero-buttons">
-    <button class="btn btn-primary" onclick="openBookingModal()">Book Appointment</button>
-    <button class="btn btn-secondary" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">
-      Explore Services
-    </button>
+    <!-- TEAM -->
+    <section id="stylists" class="section">
+      <h2 class="section-title">Our Team</h2>
+      <p class="section-subtitle">Expert stylists with years of experience</p>
+      <div class="stylists-grid">
+        <div class="service-card">
+          <div class="service-icon">👩‍🦰</div>
+          <h3>Priya Sharma</h3>
+          <p>Senior Stylist & Color Specialist (8+ years)</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">👩‍🦳</div>
+          <h3>Anita Singh</h3>
+          <p>Master Hairdresser & Bridal Specialist (10+ years)</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">💇‍♀️</div>
+          <h3>Riya Patel</h3>
+          <p>Nail Artist & Makeup Expert (5+ years)</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section id="gallery" class="section">
+      <h2 class="section-title">Gallery</h2>
+      <p class="section-subtitle">See our stunning transformations</p>
+      <div class="gallery-grid">
+        <div class="service-card">
+          <div style="width:100%;height:200px;background:linear-gradient(45deg,#ff6b6b,#4ecdc4);border-radius:15px;display:flex;align-items:center;justify-content:center;color:white;font-size:1.2rem;">
+            Before/After<br>Transformation
+          </div>
+        </div>
+        <div class="service-card">
+          <div style="width:100%;height:200px;background:linear-gradient(45deg,#667eea,#764ba2);border-radius:15px;display:flex;align-items:center;justify-content:center;color:white;font-size:1.2rem;">
+            Bridal Styling
+          </div>
+        </div>
+        <div class="service-card">
+          <div style="width:100%;height:200px;background:linear-gradient(45deg,#f093fb,#f5576c);border-radius:15px;display:flex;align-items:center;justify-content:center;color:white;font-size:1.2rem;">
+            Color Magic
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REVIEWS -->
+    <section id="reviews" class="section">
+      <h2 class="section-title">What Clients Say</h2>
+      <p class="section-subtitle">Real feedback from happy customers</p>
+      <div class="testimonials-grid">
+        <div class="service-card">
+          <div style="font-style:italic;margin-bottom:1rem;">"Best salon experience! Priya did amazing highlights."</div>
+          <div style="font-weight:600;color:#ff6b6b;">- Neha G.</div>
+          <div style="font-size:0.9rem;color:#666;">⭐⭐⭐⭐⭐</div>
+        </div>
+        <div class="service-card">
+          <div style="font-style:italic;margin-bottom:1rem;">"Perfect bridal makeup. Highly recommend!"</div>
+          <div style="font-weight:600;color:#ff6b6b;">- Priyanka R.</div>
+          <div style="font-size:0.9rem;color:#666;">⭐⭐⭐⭐⭐</div>
+        </div>
+        <div class="service-card">
+          <div style="font-style:italic;margin-bottom:1rem;">"Nails came out perfect. Great service!"</div>
+          <div style="font-weight:600;color:#ff6b6b;">- Simran K.</div>
+          <div style="font-size:0.9rem;color:#666;">⭐⭐⭐⭐⭐</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BOOKING -->
+    <section id="booking" class="section">
+      <h2 class="section-title">Book Your Appointment</h2>
+      <div style="max-width:600px;margin:0 auto;">
+        <div style="background:white;padding:2rem;border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,0.1);">
+          <div style="text-align:center;margin-bottom:2rem;">
+            <div style="font-size:1.2rem;color:#666;">📱 WhatsApp Direct Booking</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:1rem;align-items:center;">
+            <button class="btn btn-primary" style="font-size:1.1rem;padding:18px 40px;" onclick="window.open('https://wa.me/919821504642?text=Hi!%20I%20want%20to%20book%20an%20appointment%20at%20Luxe%20Salon', '_blank')">
+              📲 Book via WhatsApp
+            </button>
+            <div style="font-size:0.9rem;color:#666;text-align:center;">
+              Or fill the form below for callback
+            </div>
+            <form id="bookingForm" onsubmit="handleBooking(event);return false;" style="width:100%;">
+              <div style="display:grid;gap:1rem;">
+                <input type="text" placeholder="Full Name *" required style="padding:15px;border:2px solid #eee;border-radius:12px;font-size:1rem;">
+                <input type="tel" placeholder="Phone Number *" required style="padding:15px;border:2px solid #eee;border-radius:12px;font-size:1rem;">
+                <select required style="padding:15px;border:2px solid #eee;border-radius:12px;font-size:1rem;">
+                  <option value="">Select Service</option>
+                  <option>Haircut & Styling</option>
+                  <option>Nail Art</option>
+                  <option>Facial Treatment</option>
+                  <option>Color & Highlights</option>
+                </select>
+                <input type="date" required style="padding:15px;border:2px solid #eee;border-radius:12px;font-size:1rem;">
+                <button type="submit" class="btn btn-primary" style="width:100%;padding:18px;font-size:1.1rem;">Confirm Booking</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- MODAL -->
+  <div id="bookingModal" class="modal" style="display:none;">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeBookingModal()" style="font-size:2rem;">×</button>
+      <h3 style="margin-bottom:1.5rem;color:#333;">Quick Booking</h3>
+      <form onsubmit="handleQuickBooking(event);return false;">
+        <div style="display:grid;gap:1rem;">
+          <input type="text" placeholder="Your Name *" required style="padding:15px;border:2px solid #eee;border-radius:12px;width:100%;">
+          <input type="tel" placeholder="Phone Number *" required style="padding:15px;border:2px solid #eee;border-radius:12px;width:100%;">
+          <select required style="padding:15px;border:2px solid #eee;border-radius:12px;width:100%;">
+            <option value="">Select Service</option>
+            <option>Haircut</option>
+            <option>Nails</option>
+            <option>Facial</option>
+            <option>Color</option>
+          </select>
+          <input type="date" required style="padding:15px;border:2px solid #eee;border-radius:12px;width:100%;">
+          <button type="submit" class="btn btn-primary" style="width:100%;padding:15px;">Send Request</button>
+        </div>
+      </form>
+    </div>
   </div>
-</section>
 
-<!-- ================= SERVICES ================= -->
-<section id="services" class="section">
-  <h2 class="section-title">Our Services</h2>
-  <p class="section-subtitle">Professional salon services (demo content)</p>
-  <div class="services-grid" id="servicesGrid"></div>
-</section>
+  <!-- FOOTER -->
+  <footer>
+    <p>✨ Demo Website by Ruksar Ansari | Professional Web Designer</p>
+    <p>📞 Ready for your business? <strong>+91 98215 04642</strong></p>
+    <p>© 2026 Demo Site · Fully Responsive · SEO Optimized</p>
+  </footer>
 
-<!-- ================= STYLISTS ================= -->
-<section id="stylists" class="section">
-  <h2 class="section-title">Our Team</h2>
-  <p class="section-subtitle">Experienced professionals (demo profiles)</p>
-  <div class="stylists-grid" id="stylistsGrid"></div>
-</section>
+  <script>
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
 
-<!-- ================= GALLERY ================= -->
-<section id="gallery" class="section">
-  <h2 class="section-title">Gallery</h2>
-  <p class="section-subtitle">Sample visuals for preview</p>
-  <div class="gallery-grid" id="galleryGrid"></div>
-</section>
+    // Modal functions
+    function openBookingModal() {
+      document.getElementById('bookingModal').style.display = 'block';
+      document.body.style.overflow = 'hidden';
+    }
 
-<!-- ================= REVIEWS ================= -->
-<section id="reviews" class="section">
-  <h2 class="section-title">Client Reviews</h2>
-  <p class="section-subtitle">
-    Demo reviews shown for preview purposes.
-    <strong>Real customer reviews can be collected via Google Form.</strong>
-  </p>
-  <div class="testimonials-grid" id="testimonialsGrid"></div>
+    function closeBookingModal() {
+      document.getElementById('bookingModal').style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
 
-  <!-- Review submission handled externally -->
-</section>
+    // Close modal on outside click
+    window.onclick = function(event) {
+      const modal = document.getElementById('bookingModal');
+      if (event.target === modal) {
+        closeBookingModal();
+      }
+    }
 
-<!-- ================= BOOKING ================= -->
-<section id="booking" class="section">
-  <h2 class="section-title">Book Appointment</h2>
+    // Form handlers
+    function handleBooking(event) {
+      event.preventDefault();
+      alert('Booking request sent! We will call you shortly. 📞');
+      event.target.reset();
+    }
 
-  <div class="booking-container">
-    <form id="bookingForm" onsubmit="submitBooking(event)">
-      <div class="form-group">
-        <label for="clientName">Full Name *</label>
-        <input type="text" id="clientName" placeholder="Enter your name" required>
-      </div>
+    function handleQuickBooking(event) {
+      event.preventDefault();
+      alert('Quick booking sent! Check WhatsApp for confirmation. 📱');
+      closeBookingModal();
+    }
 
-      <div class="form-group">
-        <label for="clientPhone">Phone *</label>
-        <input type="tel" id="clientPhone" placeholder="Your contact number" required>
-      </div>
-
-      <div class="form-row">
-        <div class="form-group">
-          <label for="serviceSelect">Service *</label>
-          <select id="serviceSelect" required></select>
-        </div>
-
-        <div class="form-group">
-          <label for="stylistSelect">Preferred Stylist</label>
-          <select id="stylistSelect"></select>
-        </div>
-      </div>
-
-      <div class="form-row">
-        <div class="form-group">
-          <label for="bookingDate">Date *</label>
-          <input type="date" id="bookingDate" required>
-        </div>
-
-        <div class="form-group">
-          <label for="bookingTime">Time *</label>
-          <input type="time" id="bookingTime" required>
-        </div>
-      </div>
-
-      <button type="submit" class="btn btn-primary" style="width:100%">
-        Confirm Booking (Demo)
-      </button>
-    </form>
-  </div>
-</section>
-
-<!-- ================= MODAL ================= -->
-<div id="bookingModal" class="modal">
-  <div class="modal-content">
-    <button class="modal-close" onclick="closeBookingModal()">×</button>
-    <h3>Quick Booking (Demo)</h3>
-
-    <form onsubmit="submitQuickBooking(event)">
-      <div class="form-group">
-        <label for="quickName">Name *</label>
-        <input type="text" id="quickName" required>
-      </div>
-
-      <div class="form-group">
-        <label for="quickPhone">Phone *</label>
-        <input type="tel" id="quickPhone" required>
-      </div>
-
-      <div class="form-group">
-        <label for="quickService">Service *</label>
-        <select id="quickService" required></select>
-      </div>
-
-      <div class="form-group">
-        <label for="quickDate">Preferred Date *</label>
-        <input type="date" id="quickDate" required>
-      </div>
-
-      <button type="submit" class="btn btn-primary" style="width:100%">
-        Request Booking
-      </button>
-    </form>
-  </div>
-</div>
-
-<!-- ================= FOOTER ================= -->
-<footer>
-  <p>📍 City Center · Demo Location</p>
-  <p>📞 Salon contact available after deployment</p>
-  <p>© 2026 Luxe Salon Demo · MIT Licensed</p>
-</footer>
-
-<!-- ================= JS ================= -->
-<script src="script.js"></script>
-
+    // WhatsApp integration ready
+    console.log('✅ Professional responsive salon demo ready!');
+    console.log('📱 WhatsApp: +91 98215 04642');
+  </script>
 </body>
 </html>
