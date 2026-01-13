@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,7 +25,6 @@
   <nav>
     <div class="logo">Luxe <span>Salon</span></div>
 
-    <!-- DESKTOP MENU (UNCHANGED) -->
     <ul>
       <li><a href="#services">Services</a></li>
       <li><a href="#stylists">Team</a></li>
@@ -35,22 +35,8 @@
 
     <div class="nav-buttons">
       <button class="btn btn-outline" onclick="openBookingModal()">Book</button>
-
-      <!-- HAMBURGER (PHONE ONLY VIA CSS) -->
-      <button class="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">
-        ☰
-      </button>
     </div>
   </nav>
-
-  <!-- MOBILE MENU (PHONE ONLY) -->
-  <div id="mobileMenu" class="mobile-menu">
-    <a href="#services" onclick="closeMobileMenu()">Services</a>
-    <a href="#stylists" onclick="closeMobileMenu()">Team</a>
-    <a href="#gallery" onclick="closeMobileMenu()">Gallery</a>
-    <a href="#reviews" onclick="closeMobileMenu()">Reviews</a>
-    <a href="#booking" onclick="closeMobileMenu()">Booking</a>
-  </div>
 </header>
 
 <!-- ================= HERO ================= -->
@@ -188,16 +174,6 @@
 
 <!-- ================= JS ================= -->
 <script src="script.js"></script>
-
-<!-- MOBILE MENU JS (SAFE, ISOLATED) -->
-<script>
-  function toggleMobileMenu() {
-    document.getElementById('mobileMenu').classList.toggle('active');
-  }
-  function closeMobileMenu() {
-    document.getElementById('mobileMenu').classList.remove('active');
-  }
-</script>
 
 </body>
 </html>
