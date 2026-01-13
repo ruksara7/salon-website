@@ -1,203 +1,190 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Luxe Salon – Professional Hair & Beauty Services</title>
-  <meta name="description" content="Professional salon demo website with WhatsApp-style booking flow, services, gallery and reviews.">
+/* =========================
+   DATA CONFIGURATION
+========================= */
 
-  <!-- Social Preview -->
-  <meta property="og:title" content="Luxe Salon – Website Demo">
-  <meta property="og:description" content="Salon website demo with booking, services and reviews.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://ruksara7.github.io/salon-website/">
+const services = [
+  { id: 1, name: 'Hair Cutting', price: '₹500', icon: '✂️', desc: 'Professional haircut tailored to your style' },
+  { id: 2, name: 'Hair Coloring', price: '₹1500', icon: '🎨', desc: 'Premium color treatment for vibrant look' },
+  { id: 3, name: 'Hair Treatment', price: '₹800', icon: '💆', desc: 'Nourishing treatments for healthy hair' },
+  { id: 4, name: 'Makeup', price: '₹1000', icon: '💄', desc: 'Professional makeup for all occasions' },
+  { id: 5, name: 'Threading', price: '₹200', icon: '🪡', desc: 'Precise threading for perfect brows' },
+  { id: 6, name: 'Facial', price: '₹600', icon: '✨', desc: 'Rejuvenating facials for glowing skin' }
+];
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="styles.css">
-</head>
+const stylists = [
+  { id: 1, name: 'Senior Hair Stylist', specialty: 'Color & Cuts', bio: 'Experienced professional stylist', rating: 4.9, reviews: 120, image: '💇‍♀️' },
+  { id: 2, name: 'Makeup Specialist', specialty: 'Bridal & Party', bio: 'Certified professional makeup artist', rating: 4.8, reviews: 98, image: '💄' },
+  { id: 3, name: 'Styling Expert', specialty: 'Modern Styles', bio: 'Trendy cuts & styles expert', rating: 4.7, reviews: 110, image: '💁‍♀️' },
+  { id: 4, name: 'Treatment Professional', specialty: 'Hair & Scalp Care', bio: 'Specialist in treatments & spa', rating: 4.9, reviews: 105, image: '💆‍♀️' }
+];
 
-<body>
+const testimonials = [
+  { name: 'Happy Client', rating: 5, text: 'Amazing service and friendly staff.' },
+  { name: 'Regular Customer', rating: 4, text: 'Loved the ambiance and professionalism.' },
+  { name: 'Salon Visitor', rating: 5, text: 'Best salon experience I’ve had.' }
+];
 
-<!-- ================= HEADER ================= -->
-<header>
-  <nav>
-    <div class="logo">Luxe <span>Salon</span></div>
+const gallery = [
+  { src: 'salon1.png', title: 'Salon Interior' },
+  { src: 'salon2.png', title: 'Hair Styling' },
+  { src: 'salon3.png', title: 'Makeup' },
+  { src: 'salon4.png', title: 'Nail Art' },
+  { src: 'salon5.png', title: 'Skin Care' },
+  { src: 'salon6.png', title: 'Spa Therapy' }
+];
 
-    <!-- DESKTOP MENU (UNCHANGED) -->
-    <ul>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#stylists">Team</a></li>
-      <li><a href="#gallery">Gallery</a></li>
-      <li><a href="#reviews">Reviews</a></li>
-      <li><a href="#booking">Booking</a></li>
-    </ul>
+/* =========================
+   RENDER FUNCTIONS
+========================= */
 
-    <div class="nav-buttons">
-      <button class="btn btn-outline" onclick="openBookingModal()">Book</button>
-
-      <!-- HAMBURGER (PHONE ONLY VIA CSS) -->
-      <button class="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">
-        ☰
-      </button>
+function renderServices() {
+  const grid = document.getElementById('servicesGrid');
+  grid.innerHTML = services.map(s => `
+    <div class="service-card">
+      <div class="service-icon">${s.icon}</div>
+      <h3>${s.name}</h3>
+      <p>${s.desc}</p>
+      <div class="service-price">${s.price}</div>
     </div>
-  </nav>
+  `).join('');
 
-  <!-- MOBILE MENU (PHONE ONLY) -->
-  <div id="mobileMenu" class="mobile-menu">
-    <a href="#services" onclick="closeMobileMenu()">Services</a>
-    <a href="#stylists" onclick="closeMobileMenu()">Team</a>
-    <a href="#gallery" onclick="closeMobileMenu()">Gallery</a>
-    <a href="#reviews" onclick="closeMobileMenu()">Reviews</a>
-    <a href="#booking" onclick="closeMobileMenu()">Booking</a>
-  </div>
-</header>
+  const serviceOptions = services.map(s =>
+    `<option value="${s.name}">${s.name}</option>`
+  ).join('');
 
-<!-- ================= HERO ================= -->
-<section class="hero">
-  <h1>Transform Your Look</h1>
-  <p>Luxury salon website demo with modern design and smooth booking flow.</p>
+  document.getElementById('serviceSelect').innerHTML =
+    '<option value="">Select Service</option>' + serviceOptions;
 
-  <div class="hero-buttons">
-    <button class="btn btn-primary" onclick="openBookingModal()">Book Appointment</button>
-    <button class="btn btn-secondary"
-      onclick="document.getElementById('services').scrollIntoView({ behavior: 'smooth' })">
-      Explore Services
-    </button>
-  </div>
-</section>
+  document.getElementById('quickService').innerHTML =
+    '<option value="">Select Service</option>' + serviceOptions;
+}
 
-<!-- ================= SERVICES ================= -->
-<section id="services" class="section">
-  <h2 class="section-title">Our Services</h2>
-  <p class="section-subtitle">Professional salon services (demo content)</p>
-  <div class="services-grid" id="servicesGrid"></div>
-</section>
-
-<!-- ================= STYLISTS ================= -->
-<section id="stylists" class="section">
-  <h2 class="section-title">Our Team</h2>
-  <p class="section-subtitle">Experienced professionals (demo profiles)</p>
-  <div class="stylists-grid" id="stylistsGrid"></div>
-</section>
-
-<!-- ================= GALLERY ================= -->
-<section id="gallery" class="section">
-  <h2 class="section-title">Gallery</h2>
-  <p class="section-subtitle">Sample visuals for preview</p>
-  <div class="gallery-grid" id="galleryGrid"></div>
-</section>
-
-<!-- ================= REVIEWS ================= -->
-<section id="reviews" class="section">
-  <h2 class="section-title">Client Reviews</h2>
-  <p class="section-subtitle">
-    Demo reviews shown for preview purposes.<br>
-    <strong>Real customer reviews can be collected via Google Form.</strong>
-  </p>
-  <div class="testimonials-grid" id="testimonialsGrid"></div>
-</section>
-
-<!-- ================= BOOKING ================= -->
-<section id="booking" class="section">
-  <h2 class="section-title">Book Appointment</h2>
-
-  <div class="booking-container">
-    <form id="bookingForm" onsubmit="submitBooking(event)">
-      <div class="form-group">
-        <label for="clientName">Full Name *</label>
-        <input type="text" id="clientName" required>
-      </div>
-
-      <div class="form-group">
-        <label for="clientPhone">Phone *</label>
-        <input type="tel" id="clientPhone" required>
-      </div>
-
-      <div class="form-row">
-        <div class="form-group">
-          <label for="serviceSelect">Service *</label>
-          <select id="serviceSelect" required></select>
+function renderStylists() {
+  const grid = document.getElementById('stylistsGrid');
+  grid.innerHTML = stylists.map(s => `
+    <div class="stylist-card">
+      <div class="stylist-image">${s.image}</div>
+      <div class="stylist-info">
+        <div class="stylist-name">${s.name}</div>
+        <div class="stylist-specialty">${s.specialty}</div>
+        <div class="stylist-bio">${s.bio}</div>
+        <div class="stylist-rating">
+          ⭐ ${s.rating} (${s.reviews} reviews)
         </div>
-
-        <div class="form-group">
-          <label for="stylistSelect">Preferred Stylist</label>
-          <select id="stylistSelect"></select>
-        </div>
+        <button class="btn btn-primary" onclick="openBookingModal()">Book</button>
       </div>
+    </div>
+  `).join('');
 
-      <div class="form-row">
-        <div class="form-group">
-          <label for="bookingDate">Date *</label>
-          <input type="date" id="bookingDate" required>
-        </div>
+  document.getElementById('stylistSelect').innerHTML =
+    '<option value="">Any Stylist</option>' +
+    stylists.map(s => `<option>${s.name}</option>`).join('');
+}
 
-        <div class="form-group">
-          <label for="bookingTime">Time *</label>
-          <input type="time" id="bookingTime" required>
-        </div>
-      </div>
+function renderTestimonials() {
+  const grid = document.getElementById('testimonialsGrid');
+  grid.innerHTML = testimonials.map(t => `
+    <div class="testimonial-card">
+      <div class="rating-stars">${'★'.repeat(t.rating)}</div>
+      <p class="testimonial-text">"${t.text}"</p>
+      <strong>— ${t.name}</strong>
+    </div>
+  `).join('');
+}
 
-      <button type="submit" class="btn btn-primary" style="width:100%">
-        Confirm Booking
-      </button>
-    </form>
-  </div>
-</section>
+function renderGallery() {
+  const grid = document.getElementById('galleryGrid');
+  grid.innerHTML = gallery.map(img => `
+    <div class="gallery-item">
+      <img src="${img.src}" alt="${img.title}">
+    </div>
+  `).join('');
+}
 
-<!-- ================= MODAL ================= -->
-<div id="bookingModal" class="modal">
-  <div class="modal-content">
-    <button class="modal-close" onclick="closeBookingModal()">×</button>
-    <h3>Quick Booking</h3>
+/* =========================
+   BOOKING & MODAL
+========================= */
 
-    <form onsubmit="submitQuickBooking(event)">
-      <div class="form-group">
-        <label for="quickName">Name *</label>
-        <input type="text" id="quickName" required>
-      </div>
+function openBookingModal() {
+  document.getElementById('bookingModal').classList.add('active');
+}
 
-      <div class="form-group">
-        <label for="quickPhone">Phone *</label>
-        <input type="tel" id="quickPhone" required>
-      </div>
+function closeBookingModal() {
+  document.getElementById('bookingModal').classList.remove('active');
+}
 
-      <div class="form-group">
-        <label for="quickService">Service *</label>
-        <select id="quickService" required></select>
-      </div>
+function submitBooking(e) {
+  e.preventDefault();
 
-      <div class="form-group">
-        <label for="quickDate">Preferred Date *</label>
-        <input type="date" id="quickDate" required>
-      </div>
+  const data = {
+    name: clientName.value,
+    phone: clientPhone.value,
+    service: serviceSelect.value,
+    stylist: stylistSelect.value,
+    date: bookingDate.value,
+    time: bookingTime.value
+  };
 
-      <button type="submit" class="btn btn-primary" style="width:100%">
-        Request Booking
-      </button>
-    </form>
-  </div>
-</div>
+  sendToWhatsApp(data);
+  e.target.reset();
+}
 
-<!-- ================= FOOTER ================= -->
-<footer>
-  <p>✨ Demo Website by Ruksar Ansari</p>
-  <p>📞 WhatsApp Booking Enabled</p>
-  <p>© 2026 Luxe Salon Demo · MIT Licensed</p>
-</footer>
+function submitQuickBooking(e) {
+  e.preventDefault();
 
-<!-- ================= JS ================= -->
-<script src="script.js"></script>
+  const data = {
+    name: quickName.value,
+    phone: quickPhone.value,
+    service: quickService.value,
+    date: quickDate.value
+  };
 
-<!-- HAMBURGER JS (ISOLATED, SAFE) -->
-<script>
-  function toggleMobileMenu() {
-    document.getElementById('mobileMenu').classList.toggle('active');
-  }
-  function closeMobileMenu() {
-    document.getElementById('mobileMenu').classList.remove('active');
-  }
-</script>
+  sendToWhatsApp(data);
+  closeBookingModal();
+}
 
-</body>
-</html>
+function sendToWhatsApp(data) {
+  const number = '919821504642'; // CHANGE TO REAL NUMBER
+
+  const message = `
+Booking Request
+Name: ${data.name}
+Phone: ${data.phone}
+Service: ${data.service}
+Stylist: ${data.stylist || 'Any'}
+Date: ${data.date}
+Time: ${data.time || 'Flexible'}
+  `;
+
+  window.open(
+    `https://wa.me/${number}?text=${encodeURIComponent(message)}`,
+    '_blank'
+  );
+}
+
+function contactViaWhatsApp() {
+  window.open(
+    'https://wa.me/919821504642?text=Hello! I’d like to know about your services.',
+    '_blank'
+  );
+}
+
+/* =========================
+   INIT
+========================= */
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderServices();
+  renderStylists();
+  renderTestimonials();
+  renderGallery();
+
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('bookingDate').min = today;
+  document.getElementById('quickDate').min = today;
+
+  document.getElementById('bookingModal').addEventListener('click', e => {
+    if (e.target.id === 'bookingModal') closeBookingModal();
+  });
+});
