@@ -13,11 +13,13 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://ruksara7.github.io/salon-website/">
 
+  <!-- CSS -->
   <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
 
+<!-- ================= HEADER ================= -->
 <header>
   <nav>
     <div class="logo">Luxe <span>Salon</span></div>
@@ -41,7 +43,7 @@
     </div>
   </nav>
 
-  <!-- MOBILE MENU -->
+  <!-- MOBILE MENU (PHONE ONLY) -->
   <div id="mobileMenu" class="mobile-menu">
     <a href="#services" onclick="closeMobileMenu()">Services</a>
     <a href="#stylists" onclick="closeMobileMenu()">Team</a>
@@ -51,6 +53,7 @@
   </div>
 </header>
 
+<!-- ================= HERO ================= -->
 <section class="hero">
   <h1>Transform Your Look</h1>
   <p>Luxury salon website demo with modern design and smooth booking flow.</p>
@@ -64,24 +67,28 @@
   </div>
 </section>
 
+<!-- ================= SERVICES ================= -->
 <section id="services" class="section">
   <h2 class="section-title">Our Services</h2>
   <p class="section-subtitle">Professional salon services (demo content)</p>
   <div class="services-grid" id="servicesGrid"></div>
 </section>
 
+<!-- ================= STYLISTS ================= -->
 <section id="stylists" class="section">
   <h2 class="section-title">Our Team</h2>
   <p class="section-subtitle">Experienced professionals (demo profiles)</p>
   <div class="stylists-grid" id="stylistsGrid"></div>
 </section>
 
+<!-- ================= GALLERY ================= -->
 <section id="gallery" class="section">
   <h2 class="section-title">Gallery</h2>
   <p class="section-subtitle">Sample visuals for preview</p>
   <div class="gallery-grid" id="galleryGrid"></div>
 </section>
 
+<!-- ================= REVIEWS ================= -->
 <section id="reviews" class="section">
   <h2 class="section-title">Client Reviews</h2>
   <p class="section-subtitle">
@@ -91,6 +98,7 @@
   <div class="testimonials-grid" id="testimonialsGrid"></div>
 </section>
 
+<!-- ================= BOOKING ================= -->
 <section id="booking" class="section">
   <h2 class="section-title">Book Appointment</h2>
 
@@ -106,6 +114,30 @@
         <input type="tel" id="clientPhone" required>
       </div>
 
+      <div class="form-row">
+        <div class="form-group">
+          <label for="serviceSelect">Service *</label>
+          <select id="serviceSelect" required></select>
+        </div>
+
+        <div class="form-group">
+          <label for="stylistSelect">Preferred Stylist</label>
+          <select id="stylistSelect"></select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="bookingDate">Date *</label>
+          <input type="date" id="bookingDate" required>
+        </div>
+
+        <div class="form-group">
+          <label for="bookingTime">Time *</label>
+          <input type="time" id="bookingTime" required>
+        </div>
+      </div>
+
       <button type="submit" class="btn btn-primary" style="width:100%">
         Confirm Booking
       </button>
@@ -113,21 +145,51 @@
   </div>
 </section>
 
+<!-- ================= MODAL ================= -->
 <div id="bookingModal" class="modal">
   <div class="modal-content">
     <button class="modal-close" onclick="closeBookingModal()">×</button>
     <h3>Quick Booking</h3>
+
+    <form onsubmit="submitQuickBooking(event)">
+      <div class="form-group">
+        <label for="quickName">Name *</label>
+        <input type="text" id="quickName" required>
+      </div>
+
+      <div class="form-group">
+        <label for="quickPhone">Phone *</label>
+        <input type="tel" id="quickPhone" required>
+      </div>
+
+      <div class="form-group">
+        <label for="quickService">Service *</label>
+        <select id="quickService" required></select>
+      </div>
+
+      <div class="form-group">
+        <label for="quickDate">Preferred Date *</label>
+        <input type="date" id="quickDate" required>
+      </div>
+
+      <button type="submit" class="btn btn-primary" style="width:100%">
+        Request Booking
+      </button>
+    </form>
   </div>
 </div>
 
+<!-- ================= FOOTER ================= -->
 <footer>
   <p>✨ Demo Website by Ruksar Ansari</p>
   <p>📞 WhatsApp Booking Enabled</p>
   <p>© 2026 Luxe Salon Demo · MIT Licensed</p>
 </footer>
 
+<!-- ================= JS ================= -->
 <script src="script.js"></script>
 
+<!-- HAMBURGER JS (ISOLATED, SAFE) -->
 <script>
   function toggleMobileMenu() {
     document.getElementById('mobileMenu').classList.toggle('active');
