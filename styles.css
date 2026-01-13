@@ -1,194 +1,293 @@
-/* =========================
-   DATA CONFIGURATION
-========================= */
 
-const services = [
-  { id: 1, name: 'Hair Cutting', price: '₹500', icon: '✂️', desc: 'Professional haircut tailored to your style' },
-  { id: 2, name: 'Hair Coloring', price: '₹1500', icon: '🎨', desc: 'Premium color treatment for vibrant look' },
-  { id: 3, name: 'Hair Treatment', price: '₹800', icon: '💆', desc: 'Nourishing treatments for healthy hair' },
-  { id: 4, name: 'Makeup', price: '₹1000', icon: '💄', desc: 'Professional makeup for all occasions' },
-  { id: 5, name: 'Threading', price: '₹200', icon: '🪡', desc: 'Precise threading for perfect brows' },
-  { id: 6, name: 'Facial', price: '₹600', icon: '✨', desc: 'Rejuvenating facials for glowing skin' }
-];
-
-const stylists = [
-  { id: 1, name: 'Senior Hair Stylist', specialty: 'Color & Cuts', bio: 'Experienced professional stylist', rating: 4.9, reviews: 120, image: '💇‍♀️' },
-  { id: 2, name: 'Makeup Specialist', specialty: 'Bridal & Party', bio: 'Certified professional makeup artist', rating: 4.8, reviews: 98, image: '💄' },
-  { id: 3, name: 'Styling Expert', specialty: 'Modern Styles', bio: 'Trendy cuts & styles expert', rating: 4.7, reviews: 110, image: '💁‍♀️' },
-  { id: 4, name: 'Treatment Professional', specialty: 'Hair & Scalp Care', bio: 'Specialist in treatments & spa', rating: 4.9, reviews: 105, image: '💆‍♀️' }
-];
-
-const testimonials = [
-  { name: 'Happy Client', rating: 5, text: 'Amazing service and friendly staff.' },
-  { name: 'Regular Customer', rating: 4, text: 'Loved the ambiance and professionalism.' },
-  { name: 'Salon Visitor', rating: 5, text: 'Best salon experience I’ve had.' }
-];
-
-const gallery = [
-  { src: 'salon1.png', title: 'Salon Interior' },
-  { src: 'salon2.png', title: 'Hair Styling' },
-  { src: 'salon3.png', title: 'Makeup' },
-  { src: 'salon4.png', title: 'Nail Art' },
-  { src: 'salon5.png', title: 'Skin Care' },
-  { src: 'salon6.png', title: 'Spa Therapy' }
-];
-
-/* =========================
-   RENDER FUNCTIONS
-========================= */
-
-function renderServices() {
-  const grid = document.getElementById('servicesGrid');
-  grid.innerHTML = services.map(s => `
-    <div class="service-card">
-      <div class="service-icon">${s.icon}</div>
-      <h3>${s.name}</h3>
-      <p>${s.desc}</p>
-      <div class="service-price">${s.price}</div>
-    </div>
-  `).join('');
-
-  const serviceOptions = services.map(s =>
-    `<option value="${s.name}">${s.name}</option>`
-  ).join('');
-
-  document.getElementById('serviceSelect').innerHTML =
-    '<option value="">Select Service</option>' + serviceOptions;
-
-  document.getElementById('quickService').innerHTML =
-    '<option value="">Select Service</option>' + serviceOptions;
+:root {
+  --color-primary: #d4af37;
+  --color-secondary: #1a3a52;
+  --color-accent: #e8b4b8;
+  --color-text: #2c3e50;
+  --color-light: #f8f9fa;
+  --color-border: #ddd;
+  --radius: 8px;
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.1);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.15);
 }
 
-function renderStylists() {
-  const grid = document.getElementById('stylistsGrid');
-  grid.innerHTML = stylists.map(s => `
-    <div class="stylist-card">
-      <div class="stylist-image">${s.image}</div>
-      <div class="stylist-info">
-        <div class="stylist-name">${s.name}</div>
-        <div class="stylist-specialty">${s.specialty}</div>
-        <div class="stylist-bio">${s.bio}</div>
-        <div class="stylist-rating">
-          ⭐ ${s.rating} (${s.reviews} reviews)
-        </div>
-        <button class="btn btn-primary" onclick="openBookingModal()">Book</button>
-      </div>
-    </div>
-  `).join('');
-
-  document.getElementById('stylistSelect').innerHTML =
-    '<option value="">Any Stylist</option>' +
-    stylists.map(s => `<option>${s.name}</option>`).join('');
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-function renderTestimonials() {
-  const grid = document.getElementById('testimonialsGrid');
-  grid.innerHTML = testimonials.map(t => `
-    <div class="testimonial-card">
-      <div class="rating-stars">${'★'.repeat(t.rating)}</div>
-      <p class="testimonial-text">"${t.text}"</p>
-      <strong>— ${t.name}</strong>
-    </div>
-  `).join('');
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: var(--color-light);
+  color: var(--color-text);
+  line-height: 1.6;
 }
 
-function renderGallery() {
-  const grid = document.getElementById('galleryGrid');
-  grid.innerHTML = gallery.map(img => `
-    <div class="gallery-item">
-      <img src="${img.src}" alt="${img.title}">
-    </div>
-  `).join('');
+/* HEADER */
+header {
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow-sm);
 }
 
-/* =========================
-   BOOKING & MODAL
-========================= */
-
-function openBookingModal() {
-  document.getElementById('bookingModal').classList.add('active');
+nav {
+  max-width: 1200px;
+  margin: auto;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-function closeBookingModal() {
-  document.getElementById('bookingModal').classList.remove('active');
+.logo {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-secondary);
 }
 
-function submitBooking(e) {
-  e.preventDefault();
-
-  const data = {
-    name: clientName.value,
-    phone: clientPhone.value,
-    service: serviceSelect.value,
-    stylist: stylistSelect.value,
-    date: bookingDate.value,
-    time: bookingTime.value
-  };
-
-  sendToWhatsApp(data);
-  e.target.reset();
+.logo span {
+  color: var(--color-primary);
 }
 
-function submitQuickBooking(e) {
-  e.preventDefault();
-
-  const data = {
-    name: quickName.value,
-    phone: quickPhone.value,
-    service: quickService.value,
-    date: quickDate.value
-  };
-
-  sendToWhatsApp(data);
-  closeBookingModal();
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 24px;
 }
 
-function sendToWhatsApp(data) {
-  const number = '919821504642'; // CHANGE TO REAL NUMBER
-
-  const message = `
-Booking Request
-Name: ${data.name}
-Phone: ${data.phone}
-Service: ${data.service}
-Stylist: ${data.stylist || 'Any'}
-Date: ${data.date}
-Time: ${data.time || 'Flexible'}
-  `;
-
-  window.open(
-    `https://wa.me/${number}?text=${encodeURIComponent(message)}`,
-    '_blank'
-  );
+nav a {
+  text-decoration: none;
+  color: var(--color-text);
+  font-weight: 500;
 }
 
-/* =========================
-   INIT
-========================= */
-
-document.addEventListener('DOMContentLoaded', () => {
-  renderServices();
-  renderStylists();
-  renderTestimonials();
-  renderGallery();
-
-  const today = new Date().toISOString().split('T')[0];
-  document.getElementById('bookingDate').min = today;
-  document.getElementById('quickDate').min = today;
-
-  document.getElementById('bookingModal').addEventListener('click', e => {
-    if (e.target.id === 'bookingModal') closeBookingModal();
-  });
-});
-
-/* =========================
-   PHONE HAMBURGER (ONLY ADDITION)
-========================= */
-
-function toggleMobileMenu() {
-  document.getElementById('mobileMenu').classList.toggle('active');
+nav a:hover {
+  color: var(--color-primary);
 }
 
-function closeMobileMenu() {
-  document.getElementById('mobileMenu').classList.remove('active');
+.nav-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+/* BUTTONS */
+.btn {
+  padding: 10px 18px;
+  border-radius: var(--radius);
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: #1a1a1a;
+}
+
+.btn-secondary {
+  background: var(--color-secondary);
+  color: #fff;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary);
+}
+
+/* HERO */
+.hero {
+  min-height: 420px;
+  background: linear-gradient(135deg, var(--color-secondary), #2d5a7a);
+  color: #fff;
+  text-align: center;
+  padding: 80px 24px;
+}
+
+.hero h1 {
+  font-size: 42px;
+  margin-bottom: 16px;
+}
+
+.hero p {
+  max-width: 600px;
+  margin: auto;
+  opacity: 0.9;
+}
+
+.hero-buttons {
+  margin-top: 28px;
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* SECTIONS */
+.section {
+  max-width: 1200px;
+  margin: auto;
+  padding: 64px 24px;
+}
+
+.section-title {
+  font-size: 32px;
+  color: var(--color-secondary);
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.section-subtitle {
+  text-align: center;
+  opacity: 0.8;
+  margin-bottom: 48px;
+}
+
+/* SERVICES */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.service-card {
+  background: #fff;
+  padding: 24px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+}
+
+.service-icon {
+  font-size: 36px;
+  margin-bottom: 12px;
+}
+
+.service-price {
+  margin-top: 12px;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+/* STYLISTS */
+.stylists-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.stylist-card {
+  background: #fff;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.stylist-image {
+  height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 60px;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+}
+
+.stylist-info {
+  padding: 20px;
+}
+
+/* GALLERY (NO GAPS FIX) */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.gallery-item {
+  height: 260px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  position: relative;
+  box-shadow: var(--shadow-md);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* TESTIMONIALS */
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.testimonial-card {
+  background: #fff;
+  padding: 20px;
+  border-left: 4px solid var(--color-primary);
+  border-radius: var(--radius);
+}
+
+/* BOOKING */
+.booking-container {
+  max-width: 600px;
+  margin: auto;
+  background: #fff;
+  padding: 32px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+}
+
+.booking-container input,
+.booking-container select,
+.booking-container textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 16px;
+  border-radius: var(--radius);
+  border: 1px solid var(--color-border);
+}
+
+/* MODAL */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  align-items: center;
+  justify-content: center;
+}
+
+.modal.active {
+  display: flex;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 24px;
+  border-radius: var(--radius);
+  width: 90%;
+  max-width: 500px;
+}
+
+/* FOOTER */
+footer {
+  background: var(--color-secondary);
+  color: #fff;
+  text-align: center;
+  padding: 40px 24px;
+  margin-top: 64px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .hero h1 { font-size: 30px; }
+  nav ul { display: none; }
 }
