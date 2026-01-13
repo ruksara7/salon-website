@@ -23,7 +23,7 @@ body {
   line-height: 1.6;
 }
 
-/* HEADER */
+/* ================= HEADER ================= */
 header {
   background: #fff;
   position: sticky;
@@ -72,7 +72,16 @@ nav a:hover {
   gap: 12px;
 }
 
-/* BUTTONS */
+/* ================= HAMBURGER ================= */
+.hamburger {
+  display: none; /* hidden on PC */
+  background: none;
+  border: none;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+/* ================= BUTTONS ================= */
 .btn {
   padding: 10px 18px;
   border-radius: var(--radius);
@@ -98,7 +107,7 @@ nav a:hover {
   color: var(--color-primary);
 }
 
-/* HERO */
+/* ================= HERO ================= */
 .hero {
   min-height: 420px;
   background: linear-gradient(135deg, var(--color-secondary), #2d5a7a);
@@ -126,7 +135,7 @@ nav a:hover {
   flex-wrap: wrap;
 }
 
-/* SECTIONS */
+/* ================= SECTIONS ================= */
 .section {
   max-width: 1200px;
   margin: auto;
@@ -146,7 +155,7 @@ nav a:hover {
   margin-bottom: 48px;
 }
 
-/* SERVICES */
+/* ================= SERVICES ================= */
 .services-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -172,7 +181,7 @@ nav a:hover {
   color: var(--color-primary);
 }
 
-/* STYLISTS */
+/* ================= STYLISTS ================= */
 .stylists-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -199,7 +208,7 @@ nav a:hover {
   padding: 20px;
 }
 
-/* GALLERY (NO GAPS FIX) */
+/* ================= GALLERY ================= */
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -210,7 +219,6 @@ nav a:hover {
   height: 260px;
   border-radius: var(--radius);
   overflow: hidden;
-  position: relative;
   box-shadow: var(--shadow-md);
 }
 
@@ -220,7 +228,7 @@ nav a:hover {
   object-fit: cover;
 }
 
-/* TESTIMONIALS */
+/* ================= TESTIMONIALS ================= */
 .testimonials-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -234,7 +242,7 @@ nav a:hover {
   border-radius: var(--radius);
 }
 
-/* BOOKING */
+/* ================= BOOKING ================= */
 .booking-container {
   max-width: 600px;
   margin: auto;
@@ -254,7 +262,7 @@ nav a:hover {
   border: 1px solid var(--color-border);
 }
 
-/* MODAL */
+/* ================= MODAL ================= */
 .modal {
   display: none;
   position: fixed;
@@ -276,7 +284,7 @@ nav a:hover {
   max-width: 500px;
 }
 
-/* FOOTER */
+/* ================= FOOTER ================= */
 footer {
   background: var(--color-secondary);
   color: #fff;
@@ -285,8 +293,62 @@ footer {
   margin-top: 64px;
 }
 
-/* RESPONSIVE */
+/* ================= MOBILE ONLY ================= */
 @media (max-width: 768px) {
-  .hero h1 { font-size: 30px; }
-  nav ul { display: none; }
+
+  /* Hide desktop menu */
+  nav ul {
+    display: none;
+  }
+
+  /* Show hamburger */
+  .hamburger {
+    display: block;
+    color: var(--color-secondary);
+  }
+
+  /* Mobile menu */
+  .mobile-menu {
+    display: none;
+    flex-direction: column;
+    background: #fff;
+    border-top: 1px solid var(--color-border);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .mobile-menu a {
+    padding: 14px 20px;
+    text-decoration: none;
+    color: var(--color-text);
+    font-weight: 500;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .mobile-menu.active {
+    display: flex;
+  }
+
+  /* Mobile layout tuning */
+  .hero h1 {
+    font-size: 30px;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+  }
+
+  .hero-buttons .btn {
+    width: 100%;
+  }
+
+  .section {
+    padding: 48px 16px;
+  }
+
+  .services-grid,
+  .stylists-grid,
+  .gallery-grid,
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
 }
